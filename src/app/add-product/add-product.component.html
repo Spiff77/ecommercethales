@@ -1,8 +1,8 @@
 <h2>Create Product</h2>
 
 <pre>
-  {{form.value | json}}
-  status: {{form.valid}}
+  {{form?.value | json}}
+  status: {{form?.valid}}
 </pre>
 
 <ul *ngIf="formSubmitted">
@@ -12,7 +12,7 @@
   <li *ngIf="form.controls['price']?.errors?.['min']">Price should be more than 10</li>
 </ul>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form *ngIf="form" [formGroup]="form" (ngSubmit)="submit()">
   <input type="hidden" formControlName="id">
   <div>
     <label for="nameItem">name</label>
@@ -38,5 +38,14 @@
     <label for="description">description</label>
     <textarea formControlName="description" id="description"></textarea>
   </div>
+
+  <div formGroupName="supplier">
+    <label for="suppliers">supplier</label>
+    <select formControlName="id" id="suppliers">
+      <option [ngValue]="s.id" *ngFor="let s of suppliers">{{s.companyName}}</option>
+    </select>
+  </div>
+
+
   <button type="submit">Send</button>
 </form>
