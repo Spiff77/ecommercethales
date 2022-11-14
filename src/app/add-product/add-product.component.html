@@ -1,0 +1,42 @@
+<h2>Create Product</h2>
+
+<pre>
+  {{form.value | json}}
+  status: {{form.valid}}
+</pre>
+
+<ul *ngIf="formSubmitted">
+  <li *ngIf="form.controls['name']?.errors?.['required']">First name is required please</li>
+  <li *ngIf="form.controls['price']?.errors?.['required']">Price is required please</li>
+  <li *ngIf="form.controls['price']?.errors?.['max']">Price should be less than 1000</li>
+  <li *ngIf="form.controls['price']?.errors?.['min']">Price should be more than 10</li>
+</ul>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <input type="hidden" formControlName="id">
+  <div>
+    <label for="nameItem">name</label>
+    <input type="text" id="nameItem" formControlName="name">
+  </div>
+  <div>
+    <label for="category">category</label>
+    <input type="text" id="category" formControlName="category">
+  </div>
+  <div>
+    <label for="price">price</label>
+    <input type="number" id="price" formControlName="price">
+  </div>
+  <div>
+    <label for="promo">promo</label>
+    <input type="number" id="promo" formControlName="promo">
+  </div>
+  <div>
+    <label for="active">active</label>
+    <input type="checkbox" id="active" formControlName="active">
+  </div>
+  <div>
+    <label for="description">description</label>
+    <textarea formControlName="description" id="description"></textarea>
+  </div>
+  <button type="submit">Send</button>
+</form>

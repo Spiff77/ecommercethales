@@ -1,3 +1,7 @@
 <h2>Products List</h2>
-<app-product [produit]="prod1"></app-product>
-<app-product [produit]="prod2"></app-product>
+<div *ngIf="productSelected">
+  <span (click)="productSelected = undefined" class="clickable">[x]</span> Vous avez cliqué sur: {{productSelected?.name}} ({{productSelected?.category}})
+</div>
+<input type="text" [(ngModel)]="filterStr">
+<app-product *ngFor="let prod of getFilteredProducts()" [produit]="prod" ></app-product>
+Si une variable est undefined ou vide alors elle renvoie false dans une condition booleene
